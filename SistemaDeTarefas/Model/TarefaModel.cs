@@ -1,0 +1,12 @@
+﻿using SistemaDeTarefas.Model.Enum;
+
+namespace SistemaDeTarefas.Model
+{
+    public class TarefaModel
+    {
+        public int Id { get; set; }
+        public string? Nome { get; set; }
+        public string? Descricao { get; set; }
+        public Status Status { get; set; }
+    }
+}
