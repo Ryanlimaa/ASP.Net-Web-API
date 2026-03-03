@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;    
 using SistemaDeTarefas.Data;
+using SistemaDeTarefas.Data.Map;
 using SistemaDeTarefas.Model;
 using SistemaDeTarefas.Repositorios.Interfaces;
 

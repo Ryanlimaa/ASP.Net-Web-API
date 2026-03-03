@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using SistemaDeTarefas.Data.Map;
 
 namespace SistemaDeTarefas
 {
@@ -14,9 +16,15 @@ namespace SistemaDeTarefas
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder .Services.AddDbEntityFrameworkSqlServer()
-                .AddDbContext<Data.SistemaTarefaDBContext>(options =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));  
+            // Configurando a string de conexão para o banco de dados MySQL, obtendo-a do arquivo de configuração appsettings.json  
+            var connectionString = builder.Configuration.GetConnectionString("DataBase");
+
+            // Configurando o contexto do banco de dados para usar o MySQL, utilizando a string de conexão definida anteriormente e detectando automaticamente a versão do servidor MySQL   
+            builder.Services.AddDbContext<Data.SistemaTarefaDBContext>(options =>
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+            // Registrando o repositório de usuário para injeção de dependência, permitindo que ele seja utilizado em outras partes da aplicação, como nos controladores, para acessar os dados dos usuários no banco de dados  
+            builder.Services.AddScoped<Repositorios.Interfaces.IUsuarioRepositorio, Repositorios.UsuarioRepositorio>(); 
 
             var app = builder.Build();
 
