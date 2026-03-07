@@ -58,7 +58,7 @@ namespace SistemaDeTarefas.Repositorios
                 throw new Exception($"Usuário para o ID: {id} não foi encontrado no banco de dados.");
             }
 
-            _dbContext.Usuarios.Update(usuarioPorId);
+            _dbContext.Usuarios.Remove(usuarioPorId);
             await _dbContext.SaveChangesAsync();
 
             return true;
