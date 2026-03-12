@@ -8,5 +8,9 @@ namespace SistemaDeTarefas.Model
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
         public Status Status { get; set; }
+        public int UsuarioId { get; set; }
+
+        // Propriedade de navegação para o usuário associado à tarefa   
+        public virtual UsuarioModel? Usuario { get; set; }  
     }
 }
