@@ -23,8 +23,9 @@ namespace SistemaDeTarefas
             builder.Services.AddDbContext<Data.SistemaTarefaDBContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            // Registrando o repositório de usuário para injeção de dependência, permitindo que ele seja utilizado em outras partes da aplicação, como nos controladores, para acessar os dados dos usuários no banco de dados  
-            builder.Services.AddScoped<Repositorios.Interfaces.IUsuarioRepositorio, Repositorios.UsuarioRepositorio>(); 
+            // Registrando o repositório de usuário e tarefas para injeção de dependência, permitindo que ele seja utilizado em outras partes da aplicação, como nos controladores, para acessar os dados no banco de dados  
+            builder.Services.AddScoped<Repositorios.Interfaces.IUsuarioRepositorio, Repositorios.UsuarioRepositorio>();
+            builder.Services.AddScoped<Repositorios.Interfaces.ITarefaRepositorio, Repositorios.TarefaRepositorio>();
 
             var app = builder.Build();
 
