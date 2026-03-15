@@ -19,11 +19,11 @@ namespace SistemaDeTarefas.Repositorios
         // Implementando os métodos definidos na interface IUsuarioRepositorio para realizar as operações de CRUD nos dados dos usuários no banco de dados usando Entity Framework Core     
         public async Task<TarefaModel> BuscarPorId(int id)
         {
-            return await _dbContext.Tarefas.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Tarefas.Include(x => x.Usuario).FirstOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<TarefaModel>> BuscarTarefas()
+        public async Task<List<TarefaModel>> BuscarTarefa()
         {
-            return await _dbContext.Tarefas.ToListAsync();
+            return await _dbContext.Tarefas.Include(x => x.Usuario).ToListAsync();
         }
         public async Task<TarefaModel> Adicionar(TarefaModel tarefa)
         {
